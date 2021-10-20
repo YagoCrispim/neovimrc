@@ -32,23 +32,32 @@ let &titlestring = @%
 set mouse=n
 
 " ---------- REMAPS ----------
+map <leader>z :<CR> " starts the explorer and open file in current tab
 map <leader>l :Ex<CR> " starts the explorer and open file in current tab
 map <leader>t :Tex<CR> " starts the explorer and open file in new tab
+nmap <F2> :NERDTreeToggle %<CR>
 
-" run prettier
+" cocCommands
 command! -nargs=0 Prettier :CocCommand prettier.formatFilei
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 xmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
 nmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> gf <Plug>(coc-definition)
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 nnoremap <leader>o o0<C-D>
 nnoremap <leader>O O0<C-D>
-nmap <F2> :NERDTreeToggle %<CR>
+" nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
+nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
+
+" run prettier
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 " ---------- AUTO SYNTAX ----------
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
@@ -66,28 +75,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'townk/vim-autoclose'
+Plug 'dracula/vim', { 'name': 'dracula' }
 call plug#end()
 
 " ---------- THEME CONFIG ----------
-" onedark.vim override: Don't set a background color when running in a terminal;
-if (has("autocmd") && !has("gui_running"))
-  augroup colorset
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
-  augroup END
-endif
+packadd! dracula
+syntax enable
+colorscheme dracula
 
-hi Comment cterm=italic
-let g:onedark_hide_endofbuffer=1
-let g:onedark_terminal_italics=1
-let g:onedark_termcolors=256
-
-" checks if your terminal has 24-bit color support
-if (has("termguicolors"))
-    set termguicolors
-    hi LineNr ctermbg=NONE guibg=NONE
-endif
-
-syntax on
-colorscheme onedark
