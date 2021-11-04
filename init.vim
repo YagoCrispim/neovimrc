@@ -80,7 +80,5 @@ Plug 'dracula/vim', { 'name': 'dracula' }
 call plug#end()
 
 " ---------- THEME CONFIG ----------
-packadd! dracula
 syntax enable
 colorscheme dracula
-
