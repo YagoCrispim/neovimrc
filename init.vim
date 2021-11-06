@@ -38,8 +38,13 @@ set mouse=n
 map <leader>z :<CR> " starts the explorer and open file in current tab
 map <leader>l :Ex<CR> " starts the explorer and open file in current tab
 map <leader>t :Tex<CR> " starts the explorer and open file in new tab
+map <leader>\ :wrap<CR> " add break line
+
+nmap <F1> :set number %<CR> " add number in current page/file
 nmap <F2> :NERDTreeToggle %<CR>
 nmap <F5> :e %<CR>
+
+
 noremap <leader>d "_d
 xnoremap <leader>d "_d
 xnoremap <leader>p "_dP
