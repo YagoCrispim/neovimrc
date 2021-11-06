@@ -6,6 +6,8 @@ set ruler
 set title 
 set syntax=enable
 set list
+set clipboard=unnamedplus
+set clipboard=unnamed
 set clipboard+=unnamedplus
 set nowrap
 set encoding=utf-8
@@ -15,9 +17,10 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-set autoindent
-set copyindent
+" set autoindent
+"set copyindent
 set noswapfile
+set guifont=Nerd\ 11
 
 " Change cursor to solid vertical line
 " There are problems with Vim's floating window setting cursor to a solid
@@ -36,6 +39,10 @@ map <leader>z :<CR> " starts the explorer and open file in current tab
 map <leader>l :Ex<CR> " starts the explorer and open file in current tab
 map <leader>t :Tex<CR> " starts the explorer and open file in new tab
 nmap <F2> :NERDTreeToggle %<CR>
+nmap <F5> :e %<CR>
+noremap <leader>d "_d
+xnoremap <leader>d "_d
+xnoremap <leader>p "_dP
 
 " cocCommands
 command! -nargs=0 Prettier :CocCommand prettier.formatFilei
@@ -56,8 +63,17 @@ nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
 nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
 
 " run prettier
+noremap <F3> <Plug>(coc-format-selected)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+" OPEN TERMINAL
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+function! OpenTerminal()
+  split term://zsh
+  resize 10
+endfunction
+nnoremap <c-j> :call OpenTerminal()<CR>
 
 " ---------- AUTO SYNTAX ----------
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
@@ -72,13 +88,54 @@ Plug 'leafgarland/typescript-vim'
 Plug 'sbdchd/neoformat'
 Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'townk/vim-autoclose'
 Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'styled-components/vim-styled-components'
+
+" FILE SEARCH
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" ----- FILE EXPLORER -----
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+"nerdtree
+let NERDTreeShowHidden = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeIgnore = []
+let NERDTreeStatusline = ''
+
+"nerdtree-git-plugin
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
+" ----- END FILE EXPLORER -----
+
 call plug#end()
 
 " ---------- THEME CONFIG ----------
+
+" ----- FILE SEARCH CONFIG -----
+
+nnoremap <c-p> :Files<cr>
+
+" ----- FILE SEARCH CONFIG END -----
+
+" packadd! dracula
 syntax enable
 colorscheme dracula
