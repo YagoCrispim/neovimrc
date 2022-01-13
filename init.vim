@@ -82,27 +82,47 @@ nnoremap <leader>ls :source ~/.config/nvim/sessions<CR>
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 
-au BufNewFile,BufRead *.js setlocal filetype=typescript
-au BufNewFile,BufRead *.jsx setlocal filetype=typescript.tsx
+au BufNewFile,BufRead *.js setlocal filetype=javascript
+au BufNewFile,BufRead *.jsx setlocal filetype=javascript.jsx
 
 
 " ---------- PLUGINS ----------
 call plug#begin('~/.vim/plugged')
 " coc extensions
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
-Plug 'ianks/vim-tsx'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'sbdchd/neoformat'
-Plug 'fatih/vim-go'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
-Plug 'joshdick/onedark.vim'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'townk/vim-autoclose'
-Plug 'dracula/vim', { 'name': 'dracula' }
-" Plug 'drewtempelmeyer/palenight.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'ianks/vim-tsx'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'sbdchd/neoformat'
+  Plug 'fatih/vim-go'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'scrooloose/nerdtree'
+  Plug 'joshdick/onedark.vim'
+  Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'townk/vim-autoclose'
+  Plug 'dracula/vim', { 'name': 'dracula' }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'mxw/vim-jsx'
+  Plug 'pangloss/vim-javascript'
+
+  " Comment/Uncomment tool
+  Plug 'scrooloose/nerdcommenter'
+  
+  " A cool status bar
+  Plug 'vim-airline/vim-airline'
+  
+  " Better syntax-highlighting for filetypes in vim
+  Plug 'sheerun/vim-polyglot'
+  
+  " Intellisense engine
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  
+  " Git integration
+  Plug 'tpope/vim-fugitive'
+  
+  " Auto-close braces and scopes
+  Plug 'jiangmiao/auto-pairs'
+
 call plug#end()
 " ---------- END PLUGINS ----------
 
@@ -132,3 +152,4 @@ endif
 let g:palenight_terminal_italics=1
 
 " ---------- END THEME CONFIG ----------
+
