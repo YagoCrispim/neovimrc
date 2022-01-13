@@ -1,1 +1,1 @@
-:CocInstall coc-python
+:CocInstall coc-pyright
