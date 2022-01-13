@@ -31,7 +31,7 @@ let &titlestring = @%
 " allow resize split windows
 set mouse=n
 
-" ---------- REMAPS ----------
+" =-=-=-=-=-=-=-= REMAPS =-=-=-=-=-=-=-=
 map <leader>z :<CR> " starts the explorer and open file in current tab
 map <leader>l :Ex<CR> " starts the explorer and open file in current tab
 map <leader>t :Tex<CR> " starts the explorer and open file in new tab
@@ -76,9 +76,9 @@ nnoremap <leader>fl <cmd>Telescope git_files<cr>
 " Session control
 nnoremap <leader>mk :mksession! ~/.config/nvim/sessions<CR>
 nnoremap <leader>ls :source ~/.config/nvim/sessions<CR>
-" ---------- END REMAPS ----------
+" =-=-=-=-=-=-=-= END REMAPS =-=-=-=-=-=-=-=
 
-" ---------- AUTO SYNTAX ----------
+" =-=-=-=-=-=-=-= AUTO SYNTAX =-=-=-=-=-=-=-=
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 
@@ -86,7 +86,7 @@ au BufNewFile,BufRead *.js setlocal filetype=javascript
 au BufNewFile,BufRead *.jsx setlocal filetype=javascript.jsx
 
 
-" ---------- PLUGINS ----------
+" =-=-=-=-=-=-=-= PLUGINS =-=-=-=-=-=-=-=
 call plug#begin('~/.vim/plugged')
 " coc extensions
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
@@ -123,19 +123,16 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   " Auto-close braces and scopes
   Plug 'jiangmiao/auto-pairs'
 
+  " Airline themes
+  Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
-" ---------- END PLUGINS ----------
+" =-=-=-=-=-=-=-= END PLUGINS =-=-=-=-=-=-=-=
 
 
-" ---------- THEME CONFIG ----------
+" =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
 syntax enable
 colorscheme dracula
-
-" set background=dark
-" colorscheme palenight
-
-let g:lightline = { 'colorscheme': 'palenight' }
-let g:airline_theme = "palenight"
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -151,5 +148,4 @@ endif
 
 let g:palenight_terminal_italics=1
 
-" ---------- END THEME CONFIG ----------
-
+" =-=-=-=-=-=-=-= END THEME CONFIG =-=-=-=-=-=-=-=
