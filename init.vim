@@ -43,6 +43,10 @@ map <C-j> <ESC>:below 10sp term://zsh<CR>
 " Escaping from terminal
 tnoremap <esc> <C-\><C-N>
 
+" save
+nmap <C-S> :w<CR>
+imap <C-S> <ESC>:w<CR>a
+
 " cocCommands
 command! -nargs=0 Prettier :CocCommand prettier.formatFilei
 xmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
