@@ -1,7 +1,8 @@
 " leader key
 let mapleader=" "
 
-set number
+" set number
+set relativenumber
 set ruler
 set title 
 set syntax=enable
