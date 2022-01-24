@@ -48,6 +48,10 @@ map <C-j> <ESC>:below 10sp term://zsh<CR>
 " Escaping from terminal
 tnoremap <esc> <C-\><C-N>
 
+" exit
+nmap <C-Q> :q<CR>
+imap <C-Q> <ESC>:q<CR>a
+
 " save
 nmap <C-S> :w<CR>
 imap <C-S> <ESC>:w<CR>a
