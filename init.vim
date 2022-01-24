@@ -78,6 +78,7 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
 nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
 nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 
 " run prettier
 vmap <leader>f  <Plug>(coc-format-selected)
