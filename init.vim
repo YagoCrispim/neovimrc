@@ -12,13 +12,17 @@ set nowrap
 set encoding=utf-8
 set termencoding=utf-8
 set noswapfile
-set tabstop=2
-set softtabstop=2
+" set softtabstop=2
 set shiftwidth=2
-set expandtab
-set autoindent
 set copyindent
 set noswapfile
+
+" identation config
+set tabstop=8     " tabs are at proper location
+set expandtab     " don't use actual tab character (ctrl-v)
+set shiftwidth=2  " indenting is 4 spaces
+set autoindent    " turns it on
+set smartindent   " does the right thing (mostly) in programs
 
 " Change cursor to solid vertical line
 " There are problems with Vim's floating window setting cursor to a solid
@@ -109,6 +113,9 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
+
+  " ident lines level
+  Plug 'lukas-reineke/indent-blankline.nvim'
 
   " Comment/Uncomment tool
   Plug 'scrooloose/nerdcommenter'
