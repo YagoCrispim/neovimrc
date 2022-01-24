@@ -62,6 +62,10 @@ xmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
 nmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
 " nmap <leader>rn <Plug>(coc-rename)
 nmap <F2> <Plug>(coc-rename)
+
+" reload current file
+nmap <F5> :e<CR>
+
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
