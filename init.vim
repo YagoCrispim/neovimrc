@@ -66,6 +66,9 @@ nmap <F2> <Plug>(coc-rename)
 " reload current file
 nmap <F5> :e<CR>
 
+" add number
+nmap <F3> :set number<CR>
+
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
