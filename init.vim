@@ -149,6 +149,9 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
 
   " Airline themes
   Plug 'vim-airline/vim-airline-themes'
+  
+  " Styled components
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 call plug#end()
 " =-=-=-=-=-=-=-= END PLUGINS =-=-=-=-=-=-=-=
