@@ -1,7 +1,5 @@
-" leader key
-let mapleader=" "
+let mapleader=" " " leader key (spacebar)
 
-" set number
 set relativenumber
 set ruler
 set title 
@@ -10,31 +8,34 @@ set list
 set clipboard+=unnamedplus
 set nowrap
 set encoding=utf-8
-set termencoding=utf-8
 set noswapfile
-" set softtabstop=2
 set shiftwidth=2
 set copyindent
 set noswapfile
+set smartindent
+set autoindent
+set expandtab
+set smarttab
+set shiftwidth=2
+set tabstop=2
+set ai "Auto indent
+set si "Smart indent
+set mouse=n " allow resize split windows
+set guifont=DroidSansMono\ Nerd\ Font\ 15 " font config
 
-" identation config
+" =-=-=-=-= IDENT CONFIG =-=-=-=-=
 set tabstop=8     " tabs are at proper location
 set expandtab     " don't use actual tab character (ctrl-v)
 set shiftwidth=2  " indenting is 4 spaces
 set autoindent    " turns it on
 set smartindent   " does the right thing (mostly) in programs
 
-" Change cursor to solid vertical line
-" There are problems with Vim's floating window setting cursor to a solid
-" block. So these lines below are resetting it to a solid vertical line.
+" =-=-=-=-= Change cursor to solid vertical line =-=-=-=-=
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[6 q"
-
-" others
 let &titlestring = @%
-
-" allow resize split windows
-set mouse=n
+let g:airline_powerline_fonts = 1
+let g:palenight_terminal_italics=1
 
 " =-=-=-=-=-=-=-= REMAPS =-=-=-=-=-=-=-=
 map <leader>z :<CR> " starts the explorer and open file in current tab
@@ -52,15 +53,16 @@ tnoremap <esc> <C-\><C-N>
 nmap <C-Q> :q<CR>
 imap <C-Q> <ESC>:q<CR>a
 
-" save
+" save file
 nmap <C-S> :w<CR>
 imap <C-S> <ESC>:w<CR>a
 
-" cocCommands
+" =-=-=-=-= cocCommands =-=-=-=-=
 command! -nargs=0 Prettier :CocCommand prettier.formatFilei
 xmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
 nmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>rn <Plug>(coc-rename)
+
+" rename var
 nmap <F2> <Plug>(coc-rename)
 
 " reload current file
@@ -69,12 +71,7 @@ nmap <F5> :e<CR>
 " add number
 nmap <F3> :set number<CR>
 
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-nnoremap <leader>o o0<C-D>
-nnoremap <leader>O O0<C-D>
-" nmap <silent> gd <Plug>(coc-definition)
+" coc-definition
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -87,82 +84,95 @@ nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-" Find files using Telescope command-line sugar.
+" =-=-=-=-= fuzzy finder =-=-=-=-=
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fl <cmd>Telescope git_files<cr>
 
-" Session control
+" =-=-=-=-= Session control =-=-=-=-=
 nnoremap <leader>mk :mksession! ~/.config/nvim/sessions<CR>
 nnoremap <leader>ls :source ~/.config/nvim/sessions<CR>
-" =-=-=-=-=-=-=-= END REMAPS =-=-=-=-=-=-=-=
 
 " =-=-=-=-=-=-=-= AUTO SYNTAX =-=-=-=-=-=-=-=
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
-
 au BufNewFile,BufRead *.js setlocal filetype=javascript
 au BufNewFile,BufRead *.jsx setlocal filetype=javascript.jsx
 
-
 " =-=-=-=-=-=-=-= PLUGINS =-=-=-=-=-=-=-=
 call plug#begin('~/.vim/plugged')
+
 " coc extensions
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
-  Plug 'ianks/vim-tsx'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'peitalin/vim-jsx-typescript'
-  Plug 'sbdchd/neoformat'
-  Plug 'fatih/vim-go'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " nerdtree
   Plug 'scrooloose/nerdtree'
-  Plug 'joshdick/onedark.vim'
-  Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
+  " autoclose plugin
   Plug 'townk/vim-autoclose'
+
+  " dracula theme
   Plug 'dracula/vim', { 'name': 'dracula' }
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'mxw/vim-jsx'
-  Plug 'pangloss/vim-javascript'
 
   " ident lines level
   Plug 'lukas-reineke/indent-blankline.nvim'
 
   " Comment/Uncomment tool
   Plug 'scrooloose/nerdcommenter'
-  
+
   " A cool status bar
   Plug 'vim-airline/vim-airline'
-  
+
   " Better syntax-highlighting for filetypes in vim
   Plug 'sheerun/vim-polyglot'
-  
-  " Intellisense engine
+
+  " intellisense engine
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  
-  " Git integration
-  Plug 'tpope/vim-fugitive'
-  
-  " Auto-close braces and scopes
+
+  " auto-close braces and scopes
   Plug 'jiangmiao/auto-pairs'
 
-  " Airline themes
-  Plug 'vim-airline/vim-airline-themes'
-  
-  " Styled components
+  " styled components
   Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
-call plug#end()
-" =-=-=-=-=-=-=-= END PLUGINS =-=-=-=-=-=-=-=
+  " nerdtree icons
+  Plug 'ryanoasis/vim-devicons'
 
+  " ???
+  Plug 'ianks/vim-tsx'
+
+  " ???
+  Plug 'leafgarland/typescript-vim'
+
+  " ???
+  Plug 'peitalin/vim-jsx-typescript'
+
+  " ???
+  Plug 'sbdchd/neoformat'
+
+  " ???
+  Plug 'fatih/vim-go'
+
+  " ???
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " ???
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+  " ???
+  Plug 'mxw/vim-jsx'
+
+  " ???
+  Plug 'pangloss/vim-javascript'
+
+call plug#end()
 
 " =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
 syntax enable
 colorscheme dracula
 
 if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
@@ -173,6 +183,14 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:palenight_terminal_italics=1
+" =-=-=-=-= RECHECK =-=-=-=-=-
 
-" =-=-=-=-=-=-=-= END THEME CONFIG =-=-=-=-=-=-=-=
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" nnoremap <leader>o o0<C-D>
+" nnoremap <leader>O O0<C-D>
+
+" git integration ???
+" Plug 'tpope/vim-fugitive'
+

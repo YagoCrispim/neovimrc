@@ -9,4 +9,7 @@ mkdir -r ~/.config/nvim
 cp init.vim ~/.config/nvim/
 touch ~/.config/nvim/sessions
 
-# ./install_deps.sh
+# py dependencies
+pip3 install jedi
+pip3 install autopep8
+pip3 install --user --upgrade pynvim
