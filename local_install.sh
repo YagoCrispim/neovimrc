@@ -13,3 +13,7 @@ touch ~/.config/nvim/sessions
 pip3 install jedi
 pip3 install autopep8
 pip3 install --user --upgrade pynvim
+
+# copilot
+git clone https://github.com/github/copilot.vim.git \
+  ~/.config/nvim/pack/github/start/copilot.vim
