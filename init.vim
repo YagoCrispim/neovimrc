@@ -18,7 +18,7 @@ set expandtab
 set smarttab
 set shiftwidth=2
 set tabstop=2
-set ai "Auto indent
+" set ai "Auto indent
 set si "Smart indent
 set mouse=n " allow resize split windows
 set guifont=DroidSansMono\ Nerd\ Font\ 15 " font config
@@ -58,9 +58,9 @@ nmap <C-S> :w<CR>
 imap <C-S> <ESC>:w<CR>a
 
 " =-=-=-=-= cocCommands =-=-=-=-=
-command! -nargs=0 Prettier :CocCommand prettier.formatFilei
-xmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
-nmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+xmap <silent> <leader>a  :CocCommand prettier.formatFile
+nmap <silent> <leader>a  :CocCommand prettier.formatFile
 
 " rename var
 nmap <F2> <Plug>(coc-rename)
@@ -83,6 +83,11 @@ nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 " run prettier
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+" search content in files
+nmap     <C-F>f <Plug>CtrlSFPrompt   
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+" nmap     <C-F>p <Plug>CtrlSFPwordPath
 
 " =-=-=-=-= fuzzy finder =-=-=-=-=
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -138,6 +143,9 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
 
   " nerdtree icons
   Plug 'ryanoasis/vim-devicons'
+
+  " search content in files
+  Plug 'dyng/ctrlsf.vim'
 
   " ???
   Plug 'ianks/vim-tsx'
