@@ -1,3 +1,4 @@
+
 let mapleader=" " " leader key (spacebar)
 
 set relativenumber
@@ -5,30 +6,14 @@ set ruler
 set title 
 set syntax=enable
 set list
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 set nowrap
 set encoding=utf-8
 set noswapfile
-set shiftwidth=2
-set copyindent
-set noswapfile
-set smartindent
-set autoindent
 set expandtab
 set smarttab
-set shiftwidth=2
-set tabstop=2
-" set ai "Auto indent
-set si "Smart indent
 set mouse=n " allow resize split windows
 set guifont=DroidSansMono\ Nerd\ Font\ 15 " font config
-
-" =-=-=-=-= IDENT CONFIG =-=-=-=-=
-set tabstop=8     " tabs are at proper location
-set expandtab     " don't use actual tab character (ctrl-v)
-set shiftwidth=2  " indenting is 4 spaces
-set autoindent    " turns it on
-set smartindent   " does the right thing (mostly) in programs
 
 " =-=-=-=-= Change cursor to solid vertical line =-=-=-=-=
 let &t_SI = "\e[6 q"
@@ -49,6 +34,12 @@ map <C-j> <ESC>:below 10sp term://zsh<CR>
 " Escaping from terminal
 tnoremap <esc> <C-\><C-N>
 
+" Add new line
+imap <Enter> <C-j>
+
+" tab
+imap <Tab> <C-t>
+
 " exit
 nmap <C-Q> :q<CR>
 imap <C-Q> <ESC>:q<CR>a
@@ -59,8 +50,8 @@ imap <C-S> <ESC>:w<CR>a
 
 " =-=-=-=-= cocCommands =-=-=-=-=
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-xmap <silent> <leader>a  :CocCommand prettier.formatFile
-nmap <silent> <leader>a  :CocCommand prettier.formatFile
+xmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
 
 " rename var
 nmap <F2> <Plug>(coc-rename)
@@ -84,11 +75,6 @@ nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-" search content in files
-nmap     <C-F>f <Plug>CtrlSFPrompt   
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-" nmap     <C-F>p <Plug>CtrlSFPwordPath
-
 " =-=-=-=-= fuzzy finder =-=-=-=-=
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -97,14 +83,48 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fl <cmd>Telescope git_files<cr>
 
 " =-=-=-=-= Session control =-=-=-=-=
-nnoremap <leader>mk :mksession! ~/.config/nvim/sessions<CR>
+nnoremap <leader>ms :mksession! ~/.config/nvim/sessions<CR>
 nnoremap <leader>ls :source ~/.config/nvim/sessions<CR>
+
+" =-=-=-=-= Vimspector =-=-=-=-=
+nnoremap <Leader>il :call vimspector#Launch()<CR>
+nnoremap <Leader>ir :call vimspector#Reset()<CR>
+nnoremap <Leader>ic :call vimspector#Continue()<CR>
+
+nnoremap <Leader>tb :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>cb :call vimspector#ClearBreakpoints()<CR>
+
+nmap <Leader><Up> <Plug>VimspectorRestart
+nmap <Leader><Left> <Plug>VimspectorStepOut
+nmap <Leader><Right> <Plug>VimspectorStepInto
+nmap <Leader><Down> <Plug>VimspectorStepOver
 
 " =-=-=-=-=-=-=-= AUTO SYNTAX =-=-=-=-=-=-=-=
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 au BufNewFile,BufRead *.js setlocal filetype=javascript
 au BufNewFile,BufRead *.jsx setlocal filetype=javascript.jsx
+
+" =-=-=-=-= IDENT CONFIG =-=-=-=-=
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " number of spaces to use for autoindent
+set expandtab       " tabs are space
+set autoindent
+set copyindent      " copy indent from the previous line
+
+filetype indent off
+function F_ind()
+   let n_ind = indent(line('.'))
+   let n_col = col('.') - 1
+   if n_col > n_ind
+      return "\n" . repeat("\t", n_ind / 2)
+   else
+      return "\n" . repeat("\t", n_col / 2)
+   endif
+endfunction
+imap <expr> <CR> F_ind()
+
 
 " =-=-=-=-=-=-=-= PLUGINS =-=-=-=-=-=-=-=
 call plug#begin('~/.vim/plugged')
@@ -144,8 +164,8 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   " nerdtree icons
   Plug 'ryanoasis/vim-devicons'
 
-  " search content in files
-  Plug 'dyng/ctrlsf.vim'
+  " Debugger
+  Plug 'puremourning/vimspector' 
 
   " ???
   Plug 'ianks/vim-tsx'
