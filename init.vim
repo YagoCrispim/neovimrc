@@ -1,4 +1,3 @@
-
 let mapleader=" " " leader key (spacebar)
 
 set relativenumber
@@ -99,6 +98,11 @@ nmap <Leader><Left> <Plug>VimspectorStepOut
 nmap <Leader><Right> <Plug>VimspectorStepInto
 nmap <Leader><Down> <Plug>VimspectorStepOver
 
+" =-=-=-=-= Multi line =-=-=-=-=
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-d>'
+let g:VM_maps['Find Subword Under'] = '<C-d>'
+
 " =-=-=-=-=-=-=-= AUTO SYNTAX =-=-=-=-=-=-=-=
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
@@ -166,6 +170,9 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
 
   " Debugger
   Plug 'puremourning/vimspector' 
+
+  " Multi cursor
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
   " ???
   Plug 'ianks/vim-tsx'
