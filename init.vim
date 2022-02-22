@@ -1,18 +1,60 @@
 let mapleader=" " " leader key (spacebar)
 
-set relativenumber
-set ruler
-set title 
-set syntax=enable
-set list
-set clipboard=unnamedplus
+
+" keybindings mswin
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+
+set relativenumber   " count distance from current line to other lines
+set tabstop=4        " Show existing tab with 4 spaces width
+set softtabstop=4    " Show existing tab with 4 spaces width
+set shiftwidth=4     " When indenting with '>', use 4 spaces width
+set expandtab        " On pressing tab, insert 4 spaces
+set smarttab         " insert tabs on the start of a line according to shiftwidth
+set smartindent      " Automatically inserts one extra level of indentation in some cases
+set hidden           " Hides the current buffer when a new file is openned
+set incsearch        " Incremental search
+set ignorecase       " Ingore case in search
+set smartcase        " Consider case if there is a upper case character
+set scrolloff=10      " Minimum number of lines to keep above and below the cursor
+set colorcolumn=100  " Draws a line at the given line to keep aware of the line size
+set signcolumn=yes   " Add a column on the left. Useful for linting
+set cmdheight=2      " Give more space for displaying messages
+set updatetime=100   " Time in miliseconds to consider the changes
+set encoding=utf-8   " The encoding should be utf-8 to activate the font icons
+set nobackup         " No backup files
+set nowritebackup    " No backup files
+set splitright       " Create the vertical splits to the right
+set splitbelow       " Create the horizontal splits below
+set autoread         " Update vim after file update from outside
+set mouse=a          " Enable mouse support
 set nowrap
-set encoding=utf-8
-set noswapfile
-set expandtab
-set smarttab
-set mouse=n " allow resize split windows
-set guifont=DroidSansMono\ Nerd\ Font\ 15 " font config
+filetype on          " Detect and set the filetype option and trigger the FileType Event
+filetype plugin on   " Load the plugin file for the file type, if any
+filetype indent on   " Load the indent file for the file type, if any
+
+
+" =-=-=-=-= IDENT CONFIG =-=-=-=-=
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " number of spaces to use for autoindent
+set expandtab       " tabs are space
+set autoindent
+set copyindent      " copy indent from the previous line
+
+filetype indent off
+function F_ind()
+   let n_ind = indent(line('.'))
+   let n_col = col('.') - 1
+   if n_col > n_ind
+      return "\n" . repeat("\t", n_ind / 2)
+   else
+      return "\n" . repeat("\t", n_col / 2)
+   endif
+endfunction
+imap <expr> <CR> F_ind()
+
 
 " =-=-=-=-= Change cursor to solid vertical line =-=-=-=-=
 let &t_SI = "\e[6 q"
@@ -21,11 +63,11 @@ let &titlestring = @%
 let g:airline_powerline_fonts = 1
 let g:palenight_terminal_italics=1
 
+
 " =-=-=-=-=-=-=-= REMAPS =-=-=-=-=-=-=-=
 map <leader>z :<CR> " starts the explorer and open file in current tab
 map <leader>l :Ex<CR> " starts the explorer and open file in current tab
 map <leader>t :Tex<CR> " starts the explorer and open file in new tab
-map <leader>\ :set wrap<CR>
 map <C-p> <ESC>:FZF<CR>
 nmap <F1> :NERDTreeToggle %<CR>
 map <C-j> <ESC>:below 10sp term://zsh<CR>
@@ -47,10 +89,14 @@ imap <C-Q> <ESC>:q<CR>a
 nmap <C-S> :w<CR>
 imap <C-S> <ESC>:w<CR>a
 
+" CHECK
+inoremap <C-E> <C-X><C-E>
+inoremap <C-Y> <C-X><C-Y>
+
+
 " =-=-=-=-= cocCommands =-=-=-=-=
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-xmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
-nmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
+xmap <silent> <F3>  <Plug>(coc-codeaction-selected)
+nmap <silent> <F3>  <Plug>(coc-codeaction-selected)
 
 " rename var
 nmap <F2> <Plug>(coc-rename)
@@ -70,9 +116,12 @@ nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
 nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 
-" run prettier
+
+" =-=-=-=-= Prettier =-=-=-=-=
+command! -nargs=0 Prettier :CocCommand prettier.formatFile()<CR>
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
 
 " =-=-=-=-= fuzzy finder =-=-=-=-=
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -81,11 +130,13 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fl <cmd>Telescope git_files<cr>
 
+
 " =-=-=-=-= Session control =-=-=-=-=
 nnoremap <leader>ms :mksession! ~/.config/nvim/sessions<CR>
 nnoremap <leader>ls :source ~/.config/nvim/sessions<CR>
 
-" =-=-=-=-= Vimspector =-=-=-=-=
+
+" =-=-=-=-= Vimspector(Debugger) =-=-=-=-=
 nnoremap <Leader>il :call vimspector#Launch()<CR>
 nnoremap <Leader>ir :call vimspector#Reset()<CR>
 nnoremap <Leader>ic :call vimspector#Continue()<CR>
@@ -98,36 +149,18 @@ nmap <Leader><Left> <Plug>VimspectorStepOut
 nmap <Leader><Right> <Plug>VimspectorStepInto
 nmap <Leader><Down> <Plug>VimspectorStepOver
 
+
 " =-=-=-=-= Multi line =-=-=-=-=
 let g:VM_maps = {}
 let g:VM_maps['Find Under']         = '<C-d>'
 let g:VM_maps['Find Subword Under'] = '<C-d>'
+
 
 " =-=-=-=-=-=-=-= AUTO SYNTAX =-=-=-=-=-=-=-=
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 au BufNewFile,BufRead *.js setlocal filetype=javascript
 au BufNewFile,BufRead *.jsx setlocal filetype=javascript.jsx
-
-" =-=-=-=-= IDENT CONFIG =-=-=-=-=
-set tabstop=2       " number of visual spaces per TAB
-set softtabstop=2   " number of spaces in tab when editing
-set shiftwidth=2    " number of spaces to use for autoindent
-set expandtab       " tabs are space
-set autoindent
-set copyindent      " copy indent from the previous line
-
-filetype indent off
-function F_ind()
-   let n_ind = indent(line('.'))
-   let n_col = col('.') - 1
-   if n_col > n_ind
-      return "\n" . repeat("\t", n_ind / 2)
-   else
-      return "\n" . repeat("\t", n_col / 2)
-   endif
-endfunction
-imap <expr> <CR> F_ind()
 
 
 " =-=-=-=-=-=-=-= PLUGINS =-=-=-=-=-=-=-=
@@ -173,32 +206,29 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
 
   " Multi cursor
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+    
+  " Srcoll
+  Plug 'karb94/neoscroll.nvim'
 
-  " ???
+  " Syntax highlighting and indenting for TSX
   Plug 'ianks/vim-tsx'
 
-  " ???
+  " Syntax file and other settings for TypeScript
   Plug 'leafgarland/typescript-vim'
 
-  " ???
+  " Syntax highlighting and indentation for JSX in Typescript
   Plug 'peitalin/vim-jsx-typescript'
 
-  " ???
-  Plug 'sbdchd/neoformat'
-
-  " ???
-  Plug 'fatih/vim-go'
-
-  " ???
+  " Load extensions like VSCode and host language servers
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-  " ???
+  " Command-line fuzzy finder
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-  " ???
+  " React JSX syntax highlighting and indenting for vim
   Plug 'mxw/vim-jsx'
 
-  " ???
+  " Javascript indentation and syntax support
   Plug 'pangloss/vim-javascript'
 
 call plug#end()
@@ -211,21 +241,8 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
 if (has("termguicolors"))
   set termguicolors
 endif
 
-" =-=-=-=-= RECHECK =-=-=-=-=-
-
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" nnoremap <leader>o o0<C-D>
-" nnoremap <leader>O O0<C-D>
-
-" git integration ???
-" Plug 'tpope/vim-fugitive'
-
+lua require('neoscroll').setup()
