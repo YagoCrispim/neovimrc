@@ -136,10 +136,26 @@ au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mdx set filetype=markdown
 
 " =-=-=-=-=-=-=-= PLUGINS =-=-=-=-=-=-=-=
+
+" this will install vim-plug if not installed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+endif
+
 call plug#begin('~/.vim/plugged')
 
 " coc extensions
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+  " this is for auto complete, prettier and tslintings needed
+  Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
+  " these plugins will add highlighting and indenting to JSX and TSX files.
+  Plug 'yuezk/vim-js'
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'maxmellon/vim-jsx-pretty'
+
   " nerdtree
   Plug 'scrooloose/nerdtree'
 
@@ -169,15 +185,9 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
 
   " Multi cursor
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-    
-  " Srcoll
-  " Plug 'karb94/neoscroll.nvim'
 
   " Load extensions like VSCode and host language servers
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-  " Command-line fuzzy finder
-  " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
   " telescope
   Plug 'nvim-lua/plenary.nvim'
