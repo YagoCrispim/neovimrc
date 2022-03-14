@@ -1,1 +1,2 @@
 :CocInstall coc-pyright
+:CocInstall coc-prettier

@@ -1,3 +1,4 @@
+
 let mapleader=" " " leader key (spacebar)
 
 " init autocmd
@@ -93,9 +94,9 @@ nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 
 " =-=-=-=-= Prettier =-=-=-=-=
-command! -nargs=0 Prettier :CocCommand prettier.formatFile()<CR>
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile()<CR>
+vmap <leader>f  :call CocAction('runCommand', 'prettier.formatFile')<CR>
+nmap <leader>f  :call CocAction('runCommand', 'prettier.formatFile')<CR>
 
 " =-=-=-=-= Session control =-=-=-=-=
 nnoremap <leader>ms :mksession! ~/.config/nvim/sessions<CR>
@@ -114,12 +115,15 @@ nmap <Leader><Left> <Plug>VimspectorStepOut
 nmap <Leader><Right> <Plug>VimspectorStepInto
 nmap <Leader><Down> <Plug>VimspectorStepOver
 
+" COPILOT
+imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
 
 " =-=-=-=-= Multi line =-=-=-=-=
 let g:VM_maps = {}
 let g:VM_maps['Find Under']         = '<C-d>'
 let g:VM_maps['Find Subword Under'] = '<C-d>'
-
 
 " =-=-=-=-=-=-=-= AUTO SYNTAX =-=-=-=-=-=-=-=
 "au BufNewFile,BufRead *.ts setlocal filetype=typescript
@@ -151,10 +155,17 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   " this is for auto complete, prettier and tslintings needed
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
+  " =-=-=-=-= JAVASCRIPT/TYPESCRIPT =-=-=-=-=
   " these plugins will add highlighting and indenting to JSX and TSX files.
   Plug 'yuezk/vim-js'
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'maxmellon/vim-jsx-pretty'
+
+  " =-=-=-=-= PYTHON =-=-=-=-=
+  Plug 'davidhalter/jedi-vim' 
+  
+  " styled components
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
   " nerdtree
   Plug 'scrooloose/nerdtree'
@@ -177,9 +188,6 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   " auto-close braces and scopes
   Plug 'jiangmiao/auto-pairs'
 
-  " styled components
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-
   " Debugger
   Plug 'puremourning/vimspector' 
 
@@ -191,7 +199,10 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
 
   " telescope
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim' 
+  Plug 'nvim-telescope/telescope.nvim'
+
+  " prettier
+  Plug 'sbdchd/neoformat' 
 
 call plug#end()
 
@@ -208,6 +219,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+" =-=-=-=-= OTHERS CONFIGS =-=-=-=-=-
 lua << EOF
 require('telescope').setup {
  defaults = {
@@ -217,3 +229,7 @@ require('telescope').setup {
  }
 }
 EOF
+
+" prettier config
+let g:neoformat_try_node_exe = 1 
+
