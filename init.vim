@@ -1,4 +1,3 @@
-
 let mapleader=" " " leader key (spacebar)
 
 " init autocmd
@@ -68,8 +67,10 @@ tnoremap <esc> <C-\><C-N>
 " open autocomplete
 inoremap <silent><expr> <c-space> coc#refresh()
 
-vmap <C-s> :w<CR>
-nmap <C-s> :w<CR>
+" ctrl + s to save
+noremap <silent> <C-S>          :w<CR>
+vnoremap <silent> <C-S>         <C-C>:w<CR>
+inoremap <silent> <C-S>         <C-O>:w<CR>
 
 vmap <C-q> :q<CR>
 nmap <C-q> :q<CR>
@@ -171,7 +172,10 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   Plug 'scrooloose/nerdtree'
 
   " dracula theme
-  Plug 'dracula/vim', { 'name': 'dracula' }
+  " Plug 'dracula/vim', { 'name': 'dracula' }
+  
+  " everforest theme
+  Plug 'sainnhe/everforest'
 
   " ident lines level
   Plug 'lukas-reineke/indent-blankline.nvim'
@@ -208,7 +212,11 @@ call plug#end()
 
 " =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
 syntax enable
-colorscheme dracula
+
+" colorscheme dracula
+
+set background=dark
+colorscheme everforest
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
