@@ -1,3 +1,4 @@
+
 let mapleader=" " " leader key (spacebar)
 
 " init autocmd
@@ -116,6 +117,11 @@ nmap <Leader><Left> <Plug>VimspectorStepOut
 nmap <Leader><Right> <Plug>VimspectorStepInto
 nmap <Leader><Down> <Plug>VimspectorStepOver
 
+" ack remap
+nmap     <C-F>f <Plug>CtrlSFPrompt                  
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+
 " COPILOT
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
@@ -139,6 +145,8 @@ au BufNewFile,BufRead *.tsx setf typescriptreact
 " Markdown
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mdx set filetype=markdown
+
+syntax enable
 
 " =-=-=-=-=-=-=-= PLUGINS =-=-=-=-=-=-=-=
 
@@ -206,22 +214,23 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   Plug 'nvim-telescope/telescope.nvim'
 
   " prettier
-  Plug 'sbdchd/neoformat' 
+  Plug 'sbdchd/neoformat'
 
 call plug#end()
 
 " =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
-syntax enable
+" ack config
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] "Hide files in .gitignore
+let g:ctrlp_show_hidden = 1
 
+" theme config
 " colorscheme dracula
-
 set background=dark
 colorscheme everforest
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
-
 
 if (has("termguicolors"))
   set termguicolors
