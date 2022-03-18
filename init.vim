@@ -48,6 +48,9 @@ set si "Smart indent
 set nowrap "No Wrap lines
 set backspace=start,eol,indent
 
+" accept autocomplete with tab
+inoremap <expr> <TAB> pumvisible() ? "<C-y>" : "<TAB>"
+
 " Finding files - Search down into subfolders
 set path+=**
 set wildignore+=*/node_modules/*
