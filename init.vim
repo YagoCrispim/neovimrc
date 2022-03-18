@@ -1,4 +1,3 @@
-
 let mapleader=" " " leader key (spacebar)
 
 " init autocmd
@@ -60,7 +59,7 @@ autocmd InsertLeave * set nopaste
 " map <C-p> <ESC>:FZF<CR>
 map <C-p> <cmd>Telescope find_files<cr>
 
-nmap <F1> :NERDTreeToggle %<CR>
+nmap <Leader>e :NERDTreeToggle %<CR>
 
 " Escaping from terminal
 tnoremap <esc> <C-\><C-N>
@@ -84,7 +83,7 @@ nmap <silent> <F3>  <Plug>(coc-codeaction-selected)
 nmap <F2> <Plug>(coc-rename)
 
 " reload current file
-nmap <F5> :e<CR>
+nmap <F6> :e<CR>
 
 " coc-definition
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -105,17 +104,19 @@ nnoremap <leader>ms :mksession! ~/.config/nvim/sessions<CR>
 nnoremap <leader>ls :source ~/.config/nvim/sessions<CR>
 
 " =-=-=-=-= Vimspector(Debugger) =-=-=-=-=
-nnoremap <Leader>il :call vimspector#Launch()<CR>
-nnoremap <Leader>ir :call vimspector#Reset()<CR>
-nnoremap <Leader>ic :call vimspector#Continue()<CR>
+nnoremap <F5> :call vimspector#Launch()<CR>
+nmap <Leader>rd <Plug>VimspectorRestart
+" stop debugging
+nnoremap <Leader>sd :call vimspector#Reset()<CR>
 
 nnoremap <Leader>tb :call vimspector#ToggleBreakpoint()<CR>
-nnoremap <Leader>cb :call vimspector#ClearBreakpoints()<CR>
+nnoremap <Leader>rb :call vimspector#ClearBreakpoints()<CR>
+nnoremap <Leader>cb :call vimspector#ClearLineBreakpoint( @%, line(".") )<CR>
 
-nmap <Leader><Up> <Plug>VimspectorRestart
 nmap <Leader><Left> <Plug>VimspectorStepOut
-nmap <Leader><Right> <Plug>VimspectorStepInto
-nmap <Leader><Down> <Plug>VimspectorStepOver
+nmap <Leader><Up> <Plug>VimspectorStepInto
+nmap <Leader><Right> <Plug>VimspectorStepOver
+nmap <Leader><Down> :call vimspector#Continue()<CR>
 
 " ack remap
 nmap     <C-F>f <Plug>CtrlSFPrompt                  
