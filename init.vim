@@ -62,7 +62,8 @@ autocmd InsertLeave * set nopaste
 " map <C-p> <ESC>:FZF<CR>
 map <C-p> <cmd>Telescope find_files<cr>
 
-nmap <Leader>e :NERDTreeToggle %<CR>
+" open nerdtree
+nmap <silent>zz :NERDTreeToggle<CR>
 
 " Escaping from terminal
 tnoremap <esc> <C-\><C-N>
