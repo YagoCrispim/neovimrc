@@ -185,10 +185,10 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   Plug 'scrooloose/nerdtree'
 
   " dracula theme
-  " Plug 'dracula/vim', { 'name': 'dracula' }
+  Plug 'dracula/vim', { 'name': 'dracula' }
   
   " everforest theme
-  Plug 'sainnhe/everforest'
+  " Plug 'sainnhe/everforest'
 
   " ident lines level
   Plug 'lukas-reineke/indent-blankline.nvim'
@@ -229,9 +229,9 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:ctrlp_show_hidden = 1
 
 " theme config
-" colorscheme dracula
+colorscheme dracula
 set background=dark
-colorscheme everforest
+" colorscheme everforest
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
