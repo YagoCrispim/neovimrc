@@ -1,4 +1,3 @@
-
 let mapleader=" " " leader key (spacebar)
 
 " init autocmd
@@ -64,7 +63,7 @@ autocmd InsertLeave * set nopaste
 map <C-p> <cmd>Telescope find_files<cr>
 
 " open nerdtree
-nmap <silent>zz :NERDTreeToggle %<CR>
+nnoremap <silent> <C-b> :NERDTreeToggle %<CR>
 
 " Escaping from terminal
 tnoremap <esc> <C-\><C-N>
@@ -127,6 +126,16 @@ nmap <Leader><Down> :call vimspector#Continue()<CR>
 nmap     <C-F>f <Plug>CtrlSFPrompt                  
 nmap     <C-F>n <Plug>CtrlSFCwordPath
 nmap     <C-F>p <Plug>CtrlSFPwordPath
+
+" switch between tabs
+tnoremap <A-Left> <C-\><C-n><C-w>h
+tnoremap <A-Down> <C-\><C-n><C-w>j
+tnoremap <A-Up> <C-\><C-n><C-w>k
+tnoremap <A-Right> <C-\><C-n><C-w>l
+nnoremap <A-Left> <C-w>h
+nnoremap <A-Down> <C-w>j
+nnoremap <A-Up> <C-w>k
+nnoremap <A-Right> <C-w>l 
 
 " COPILOT
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
@@ -254,5 +263,14 @@ require('telescope').setup {
 EOF
 
 " prettier config
-let g:neoformat_try_node_exe = 1 
+let g:neoformat_try_node_exe = 1
+
+" NERDTREE config
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusline = ''
+
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
