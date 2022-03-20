@@ -1,3 +1,4 @@
+
 let mapleader=" " " leader key (spacebar)
 
 " init autocmd
@@ -63,7 +64,7 @@ autocmd InsertLeave * set nopaste
 map <C-p> <cmd>Telescope find_files<cr>
 
 " open nerdtree
-nmap <silent>zz :NERDTreeToggle<CR>
+nmap <silent>zz :NERDTreeToggle %<CR>
 
 " Escaping from terminal
 tnoremap <esc> <C-\><C-N>
