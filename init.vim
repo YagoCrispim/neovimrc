@@ -122,6 +122,8 @@ nmap <Leader><Up> <Plug>VimspectorStepInto
 nmap <Leader><Right> <Plug>VimspectorStepOver
 nmap <Leader><Down> :call vimspector#Continue()<CR>
 
+nmap <leader>nh :noh<CR>
+
 " ack remap
 nmap     <C-F>f <Plug>CtrlSFPrompt                  
 nmap     <C-F>n <Plug>CtrlSFCwordPath
@@ -270,7 +272,7 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
+let g:NERDTreeWinSize=45
 
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
