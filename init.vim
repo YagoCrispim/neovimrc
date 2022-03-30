@@ -79,6 +79,14 @@ inoremap <silent> <C-S>         <C-O>:w<CR>
 vmap <C-q> :q<CR>
 nmap <C-q> :q<CR>
 
+" wsl clipboard
+"if system('uname -r') =~ "Microsoft"
+    "augroup Yank
+        "autocmd!
+        "autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+        "augroup END
+"endif
+
 " =-=-=-=-= cocCommands =-=-=-=-=
 xmap <silent> <F3>  <Plug>(coc-codeaction-selected)
 nmap <silent> <F3>  <Plug>(coc-codeaction-selected)
@@ -142,6 +150,9 @@ nnoremap <A-Right> <C-w>l
 " COPILOT
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
+
+nmap <Leader>ec :Copilot enable<CR>
+nmap <Leader>dc :Copilot disable<CR>
 
 
 " =-=-=-=-= Multi line =-=-=-=-=
@@ -254,15 +265,15 @@ if (has("termguicolors"))
 endif
 
 " =-=-=-=-= OTHERS CONFIGS =-=-=-=-=-
-lua << EOF
-require('telescope').setup {
- defaults = {
-   file_ignore_patterns = {
-     'node_modules/.*'
-     }
- }
-}
-EOF
+"lua << EOF
+"require('telescope').setup {
+ "defaults = {
+   "file_ignore_patterns = {
+     "'node_modules/.*'
+     "}
+ "}
+"}
+"EOF
 
 " prettier config
 let g:neoformat_try_node_exe = 1
