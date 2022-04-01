@@ -1,12 +1,5 @@
 let mapleader=" " " leader key (spacebar)
 
-" init autocmd
-autocmd!
-" set script encoding
-scriptencoding utf-8
-" stop loading config if it's on tiny or small
-" if !1 | finish | endif
-
 set clipboard=unnamedplus
 set number
 syntax enable
@@ -24,6 +17,14 @@ set expandtab
 set mouse=a
 set wrap
 
+" init autocmd
+autocmd!
+" set script encoding
+scriptencoding utf-8
+
+" remove auto comment
+au FileType * set fo-=c fo-=r fo-=o
+
 " incremental substitution (neovim)
 if has('nvim')
   set inccommand=split
@@ -31,6 +32,7 @@ endif
 
 set nosc noru nosm
 
+" add space and 2 spaces between {}
 inoremap {<Enter> {<Enter>}<Esc>O
 
 " Don't redraw while executing macros (good performance config)
