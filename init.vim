@@ -5,7 +5,7 @@ autocmd!
 " set script encoding
 scriptencoding utf-8
 " stop loading config if it's on tiny or small
-if !1 | finish | endif
+" if !1 | finish | endif
 
 set clipboard=unnamedplus
 set number
@@ -19,9 +19,10 @@ set hlsearch
 set showcmd
 set cmdheight=1
 set laststatus=2
-set scrolloff=10
+set scrolloff=5
 set expandtab
 set mouse=a
+set wrap
 
 " incremental substitution (neovim)
 if has('nvim')
@@ -29,6 +30,8 @@ if has('nvim')
 endif
 
 set nosc noru nosm
+
+inoremap {<Enter> {<Enter>}<Esc>O
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
@@ -58,6 +61,12 @@ set wildignore+=*/node_modules/*
 " Turn off paste mode when leaving insert
 autocmd InsertLeave * set nopaste
 
+" navigation through long line wrapped
+vmap <Down> gj
+nmap <Down> gj
+vmap <Up> gk
+nmap <Up> gk
+
 " REMAPS
 " map <C-p> <ESC>:FZF<CR>
 map <C-p> <cmd>Telescope find_files<cr>
@@ -67,6 +76,10 @@ nnoremap <silent> <C-b> :NERDTreeToggle %<CR>
 
 " Escaping from terminal
 tnoremap <esc> <C-\><C-N>
+
+" if wrap toggle to nowrap
+nnoremap <Leader>nw :set nowrap<CR>
+nnoremap <Leader>w :set wrap<CR>
 
 " open autocomplete
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -78,14 +91,6 @@ inoremap <silent> <C-S>         <C-O>:w<CR>
 
 vmap <C-q> :q<CR>
 nmap <C-q> :q<CR>
-
-" wsl clipboard
-"if system('uname -r') =~ "Microsoft"
-    "augroup Yank
-        "autocmd!
-        "autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
-        "augroup END
-"endif
 
 " =-=-=-=-= cocCommands =-=-=-=-=
 xmap <silent> <F3>  <Plug>(coc-codeaction-selected)
@@ -129,7 +134,6 @@ nmap <Leader><Left> <Plug>VimspectorStepOut
 nmap <Leader><Up> <Plug>VimspectorStepInto
 nmap <Leader><Right> <Plug>VimspectorStepOver
 nmap <Leader><Down> :call vimspector#Continue()<CR>
-
 nmap <leader>nh :noh<CR>
 
 " ack remap
@@ -151,9 +155,11 @@ nnoremap <A-Right> <C-w>l
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
-nmap <Leader>ec :Copilot enable<CR>
-nmap <Leader>dc :Copilot disable<CR>
+" auto disable copilot
+autocmd VimEnter * Copilot disable
 
+" map to enable copilot
+nmap <Leader>ec :Copilot enable<CR>
 
 " =-=-=-=-= Multi line =-=-=-=-=
 let g:VM_maps = {}
@@ -208,10 +214,10 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   Plug 'scrooloose/nerdtree'
 
   " dracula theme
-  Plug 'dracula/vim', { 'name': 'dracula' }
+  " Plug 'dracula/vim', { 'name': 'dracula' }
   
   " everforest theme
-  " Plug 'sainnhe/everforest'
+  Plug 'sainnhe/everforest'
 
   " ident lines level
   Plug 'lukas-reineke/indent-blankline.nvim'
@@ -252,9 +258,9 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:ctrlp_show_hidden = 1
 
 " theme config
-colorscheme dracula
+" colorscheme dracula
 set background=dark
-" colorscheme everforest
+colorscheme everforest
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
