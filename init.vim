@@ -291,7 +291,11 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
-let g:NERDTreeWinSize=45
+" job
+" let g:NERDTreeWinSize=45
+"personal
+let g:NERDTreeWinSize=30
 
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
