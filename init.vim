@@ -196,7 +196,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-styled-components']
   " this is for auto complete, prettier and tslintings needed
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
@@ -208,9 +208,6 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
 
   " =-=-=-=-= PYTHON =-=-=-=-=
   Plug 'davidhalter/jedi-vim' 
-  
-  " styled components
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
   " nerdtree
   Plug 'scrooloose/nerdtree'

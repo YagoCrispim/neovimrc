@@ -1,2 +1,3 @@
-:CocInstall coc-pyright
-:CocInstall coc-prettier
+CocInstall coc-pyright
+CocInstall coc-prettier
+CocInstall coc-styled-components
