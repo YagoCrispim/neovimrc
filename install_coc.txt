@@ -1,4 +1,0 @@
-CocInstall coc-pyright
-CocInstall coc-prettier
-CocInstall coc-styled-components
-CocInstall coc-go

@@ -1,8 +1,8 @@
-let mapleader=" " " leader key (spacebar)
+" leader key (spacebar)
+let mapleader=" "
 
 set clipboard=unnamedplus
 set number
-syntax enable
 set fileencodings=utf-8,sjis,euc-jp,latin
 set encoding=utf-8
 set title
@@ -16,32 +16,8 @@ set scrolloff=5
 set expandtab
 set mouse=a
 set wrap
-
-" init autocmd
-autocmd!
-" set script encoding
-scriptencoding utf-8
-
-" remove auto comment
-au FileType * set fo-=c fo-=r fo-=o
-
-" incremental substitution (neovim)
-if has('nvim')
-  set inccommand=split
-endif
-
 set nosc noru nosm
-
-" add space and 2 spaces between {}
-inoremap {<Enter> {<Enter>}<Esc>O
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
-
-" Ignore case when searching
-set ignorecase
-
-" Be smart when using tabs ;)
+set ignorecase " ignore case when searching
 set smarttab
 
 " indents
@@ -53,15 +29,29 @@ set si "Smart indent
 set nowrap "No Wrap lines
 set backspace=start,eol,indent
 
+" init autocmd
+autocmd!
+
+" turn off paste mode when leaving insert
+autocmd InsertLeave * set nopaste
+
+" set script encoding
+scriptencoding utf-8
+
+" remove auto comment
+au FileType * set fo-=c fo-=r fo-=o
+
+" incremental substitution (neovim)
+if has('nvim')
+  set inccommand=split
+endif
+
+" REMAPS
+" add space and 2 spaces between {}
+inoremap {<Enter> {<Enter>}<Esc>O
+
 " accept autocomplete with tab
 inoremap <expr> <TAB> pumvisible() ? "<C-y>" : "<TAB>"
-
-" Finding files - Search down into subfolders
-set path+=**
-set wildignore+=*/node_modules/*
-
-" Turn off paste mode when leaving insert
-autocmd InsertLeave * set nopaste
 
 " navigation through long line wrapped
 vmap <Down> gj
@@ -69,8 +59,6 @@ nmap <Down> gj
 vmap <Up> gk
 nmap <Up> gk
 
-" REMAPS
-" map <C-p> <ESC>:FZF<CR>
 map <C-p> <cmd>Telescope find_files<cr>
 
 " open nerdtree
@@ -91,10 +79,12 @@ noremap <silent> <C-S>          :w<CR>
 vnoremap <silent> <C-S>         <C-C>:w<CR>
 inoremap <silent> <C-S>         <C-O>:w<CR>
 
-vmap <C-q> :q<CR>
-nmap <C-q> :q<CR>
+" ctrl + w to leave
+noremap <silent> <C-W>          :q<CR>
+vnoremap <silent> <C-W>         <C-C>:q<CR>
+inoremap <silent> <C-W>         <C-O>:q<CR>
 
-" =-=-=-=-= cocCommands =-=-=-=-=
+" coc-commands
 xmap <silent> <F3>  <Plug>(coc-codeaction-selected)
 nmap <silent> <F3>  <Plug>(coc-codeaction-selected)
 
@@ -113,21 +103,19 @@ nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
 nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 
-" =-=-=-=-= Prettier =-=-=-=-=
-" command! -nargs=0 Prettier :CocCommand prettier.formatFile()<CR>
+" prettier
 vmap <leader>f  :call CocAction('runCommand', 'prettier.formatFile')<CR>
 nmap <leader>f  :call CocAction('runCommand', 'prettier.formatFile')<CR>
 
-" =-=-=-=-= Session control =-=-=-=-=
+" session control
 nnoremap <leader>ms :mksession! ~/.config/nvim/sessions<CR>
 nnoremap <leader>ls :source ~/.config/nvim/sessions<CR>
 
-" =-=-=-=-= Vimspector(Debugger) =-=-=-=-=
+" vimspector(debugger)
 nnoremap <F5> :call vimspector#Launch()<CR>
 nmap <Leader>rd <Plug>VimspectorRestart
-" stop debugging
-nnoremap <Leader>sd :call vimspector#Reset()<CR>
 
+nnoremap <Leader>sd :call vimspector#Reset()<CR> " stop debugging
 nnoremap <Leader>tb :call vimspector#ToggleBreakpoint()<CR>
 nnoremap <Leader>rb :call vimspector#ClearBreakpoints()<CR>
 nnoremap <Leader>cb :call vimspector#ClearLineBreakpoint( @%, line(".") )<CR>
@@ -153,7 +141,7 @@ nnoremap <A-Down> <C-w>j
 nnoremap <A-Up> <C-w>k
 nnoremap <A-Right> <C-w>l 
 
-" COPILOT
+" copilot
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
@@ -163,65 +151,45 @@ autocmd VimEnter * Copilot disable
 " map to enable copilot
 nmap <Leader>ec :Copilot enable<CR>
 
-" =-=-=-=-= Multi line =-=-=-=-=
-let g:VM_maps = {}
-let g:VM_maps['Find Under']         = '<C-d>'
-let g:VM_maps['Find Subword Under'] = '<C-d>'
-
-" =-=-=-=-=-=-=-= AUTO SYNTAX =-=-=-=-=-=-=-=
-"au BufNewFile,BufRead *.ts setlocal filetype=typescript
-"au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
-"au BufNewFile,BufRead *.js setlocal filetype=javascript
-"au BufNewFile,BufRead *.jsx setlocal filetype=javascript.jsx
-
-" JavaScript
+" javaScript
 au BufNewFile,BufRead *.es6 setf javascript
-" TypeScript
+
+" typeScript
 au BufNewFile,BufRead *.tsx setf typescriptreact
-" Markdown
+
+" markdown
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mdx set filetype=markdown
 
-syntax enable
-
 " =-=-=-=-=-=-=-= PLUGINS =-=-=-=-=-=-=-=
-
-" this will install vim-plug if not installed
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
+if empty(glob('~/.config/nvim/autoload/plug.vim')) " this will install vim-plug if not installed
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.vim/plugged')
-
-" coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-styled-components']
   " this is for auto complete, prettier and tslintings needed
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
-  " =-=-=-=-= JAVASCRIPT/TYPESCRIPT =-=-=-=-=
-  " these plugins will add highlighting and indenting to JSX and TSX files.
+  " js/ts
   Plug 'yuezk/vim-js'
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'maxmellon/vim-jsx-pretty'
 
-  " =-=-=-=-= PYTHON =-=-=-=-=
+  " python
   Plug 'davidhalter/jedi-vim' 
 
   " nerdtree
   Plug 'scrooloose/nerdtree'
 
-  " dracula theme
-  " Plug 'dracula/vim', { 'name': 'dracula' }
-  
   " everforest theme
   Plug 'sainnhe/everforest'
 
   " ident lines level
   Plug 'lukas-reineke/indent-blankline.nvim'
 
-  " Comment/Uncomment tool
+  " comment/uncomment tool
   Plug 'scrooloose/nerdcommenter'
 
   " A cool status bar
@@ -233,13 +201,13 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
   " auto-close braces and scopes
   Plug 'jiangmiao/auto-pairs'
 
-  " Debugger
+  " debugger
   Plug 'puremourning/vimspector' 
 
-  " Multi cursor
+  " multi cursor
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-  " Load extensions like VSCode and host language servers
+  " load extensions like VSCode and host language servers
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   " telescope
@@ -252,12 +220,6 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
 call plug#end()
 
 " =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
-" ack config
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] "Hide files in .gitignore
-let g:ctrlp_show_hidden = 1
-
-" theme config
-" colorscheme dracula
 set background=dark
 colorscheme everforest
 
@@ -269,30 +231,31 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" =-=-=-=-= OTHERS CONFIGS =-=-=-=-=-
-"lua << EOF
-"require('telescope').setup {
- "defaults = {
-   "file_ignore_patterns = {
-     "'node_modules/.*'
-     "}
- "}
-"}
-"EOF
+" =-=-=-=-= OTHERS CONFIGS =-=-=-=-=
+" coc extensions
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-styled-components', 'coc-go']
+
+" ack config
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] "Hide files in .gitignore
+let g:ctrlp_show_hidden = 1
+
+" default python interpreter
+let g:python3_host_prog = $HOME."/.venvs/vim/bin/python"
 
 " prettier config
 let g:neoformat_try_node_exe = 1
 
-" NERDTREE config
+" nerdtree config
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
-" job
-" let g:NERDTreeWinSize=45
-"personal
 let g:NERDTreeWinSize=30
 
-" Automaticaly close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" multi line
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-d>'
+let g:VM_maps['Find Subword Under'] = '<C-d>'
+
+syntax enable
 
