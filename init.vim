@@ -80,9 +80,7 @@ vnoremap <silent> <C-S>         <C-C>:w<CR>
 inoremap <silent> <C-S>         <C-O>:w<CR>
 
 " ctrl + w to leave
-noremap <silent> <C-W>          :q<CR>
-vnoremap <silent> <C-W>         <C-C>:q<CR>
-inoremap <silent> <C-W>         <C-O>:q<CR>
+nnoremap <silent> <C-W>         <C-C>:q<CR>
 
 " coc-commands
 xmap <silent> <F3>  <Plug>(coc-codeaction-selected)
