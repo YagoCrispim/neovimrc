@@ -1,4 +1,4 @@
 #!/bin/bash
 
-git pull
+# git pull
 cp init.vim ~/.config/nvim/init.vim
