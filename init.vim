@@ -225,6 +225,9 @@ call plug#begin('~/.vim/plugged')
   " prettier
   Plug 'sbdchd/neoformat'
 
+  " angular coc
+  Plug 'iamcco/coc-angular'
+
 call plug#end()
 
 " =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
