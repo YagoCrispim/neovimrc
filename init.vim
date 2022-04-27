@@ -151,7 +151,7 @@ imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
 " auto disable copilot
-" autocmd VimEnter * Copilot disable
+autocmd VimEnter * Copilot disable
 
 " map to enable copilot
 nmap <Leader>ec :Copilot enable<CR>
@@ -190,7 +190,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'jistr/vim-nerdtree-tabs'
 
   " everforest theme
-  Plug 'sainnhe/everforest'
+  " Plug 'sainnhe/everforest'
+
+  " dracula theme
+  Plug 'dracula/vim', { 'as': 'dracula' }
 
   " ident lines level
   Plug 'lukas-reineke/indent-blankline.nvim'
@@ -226,8 +229,8 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
-set background=dark
-colorscheme everforest
+" set background=dark
+colorscheme dracula
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -239,7 +242,7 @@ endif
 
 " =-=-=-=-= OTHERS CONFIGS =-=-=-=-=
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-styled-components', 'coc-go']
+let g:coc_global_extensions = ['coc-git', 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-styled-components', 'coc-go']
 
 " ack config
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] "Hide files in .gitignore
@@ -256,6 +259,6 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
-let g:NERDTreeWinSize=30
+let g:NERDTreeWinSize=40
 
 syntax enable
