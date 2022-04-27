@@ -63,10 +63,9 @@ nmap <Up> gk
 
 map <C-p> <cmd>Telescope find_files<cr>
 
-" open nerdtree
-" nnoremap <silent> <C-b> :NERDTreeTabsOpen<CR>
+" always open on every tab
+nnoremap <Leader>ao :NERDTreeTabsOpen<CR>
 nnoremap <silent> <C-b> :NERDTreeMirrorToggle<CR>
-" nnoremap <Leader>b :NERDTreeTabsClose<CR>
 nnoremap <Leader>ff :NERDTreeTabsFind<CR>
 
 " autocmd VimEnter * wincmd w
@@ -260,5 +259,12 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
 let g:NERDTreeWinSize=40
+
+" nedtreetabs config
+let g:nerdtree_tabs_smart_startup_focus=2 " always focus in file
+let g:nerdtree_tabs_autofind=1
+" nerdtreertabs always open
+let g:nerdtree_tabs_open_on_startup=2
+
 
 syntax enable
