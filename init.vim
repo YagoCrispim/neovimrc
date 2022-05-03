@@ -149,11 +149,23 @@ nnoremap <A-Right> <C-w>l
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
+" toggle terminal
+nmap <C-j> :ToggleTerm size=15 dir=. direction=horizontal<CR>
+
 " auto disable copilot
 autocmd VimEnter * Copilot disable
 
 " map to enable copilot
 nmap <Leader>ec :Copilot enable<CR>
+
+" map navigation in buffeer line
+noremap <A-PageUp> :BufferLineCyclePrev<CR> 
+vnoremap <A-PageUp> <C-C>:BufferLineCyclePrev<CR>
+inoremap <A-PageUp> <C-O>:BufferLineCyclePrev<CR>
+
+noremap <A-PageDown> :BufferLineCycleNext<CR>
+vnoremap <A-PageDown> <C-C>:BufferLineCycleNext<CR>
+inoremap <A-PageDown> <C-O>:BufferLineCycleNext<CR>
 
 " javaScript
 au BufNewFile,BufRead *.es6 setf javascript
@@ -225,9 +237,13 @@ call plug#begin('~/.vim/plugged')
   " prettier
   Plug 'sbdchd/neoformat'
 
-  " angular coc
-  Plug 'iamcco/coc-angular'
+  " terminal
+  Plug 'akinsho/toggleterm.nvim'
 
+  " buffer lines
+  Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+  " Plug 'ryanoasis/vim-devicons' Icons without colours
+  Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 call plug#end()
 
 " =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
@@ -244,7 +260,7 @@ endif
 
 " =-=-=-=-= OTHERS CONFIGS =-=-=-=-=
 " coc extensions
-let g:coc_global_extensions = ['coc-git', 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-styled-components', 'coc-go']
+let g:coc_global_extensions = ['coc-angular', 'coc-git', 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-styled-components', 'coc-go']
 
 " ack config
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] "Hide files in .gitignore
@@ -261,7 +277,7 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
-let g:NERDTreeWinSize=40
+let g:NERDTreeWinSize=30
 
 " nedtreetabs config
 let g:nerdtree_tabs_smart_startup_focus=2 " always focus in file
@@ -269,5 +285,14 @@ let g:nerdtree_tabs_autofind=1
 " nerdtreertabs always open
 let g:nerdtree_tabs_open_on_startup=2
 
+" buffer line
+lua << EOF
+require("bufferline").setup{
+  options = {
+    mode = "tabs",
+    reverse = true,
+  }
+}
+EOF
 
 syntax enable
