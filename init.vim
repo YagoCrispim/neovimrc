@@ -65,6 +65,7 @@ map <C-p> <cmd>Telescope find_files<cr>
 
 " always open on every tab
 nnoremap <Leader>ao :NERDTreeTabsOpen<CR>
+nnoremap <Leader>ac :NERDTreeTabsClose<CR>
 nnoremap <silent> <C-b> :NERDTreeMirrorToggle<CR>
 nnoremap <Leader>ff :NERDTreeTabsFind<CR>
 
