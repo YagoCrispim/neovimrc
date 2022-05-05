@@ -23,3 +23,6 @@ git clone https://github.com/github/copilot.vim.git \
 
 # ferret dependencies
 sudo apt-get install ripgrep
+
+# c/c++ lsp
+sudo apt install ccls
