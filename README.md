@@ -1,4 +1,4 @@
-# My Neovim config file
+# My Neovim config
 
 <!-- < style="display: flex; width: 100%; justify-content: center;"> -->
   <h1 align="center">
