@@ -1,6 +1,8 @@
 " leader key (spacebar)
 let mapleader=" "
 
+filetype plugin on
+
 set clipboard=unnamedplus
 " set number
 " set relativenumber
@@ -42,6 +44,9 @@ scriptencoding utf-8
 
 " remove auto comment
 au FileType * set fo-=c fo-=r fo-=o
+
+" treesiter
+autocmd VimEnter * TSUpdate
 
 " incremental substitution (neovim)
 if has('nvim')
@@ -207,6 +212,9 @@ call plug#begin('~/.vim/plugged')
   " dracula theme
   Plug 'dracula/vim', { 'as': 'dracula' }
 
+  " gruvbox
+  " Plug 'ellisonleao/gruvbox.nvim'
+
   " ident lines level
   Plug 'lukas-reineke/indent-blankline.nvim'
 
@@ -245,6 +253,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
   " Plug 'ryanoasis/vim-devicons' Icons without colours
   Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+
+  " treesiter
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 " =-=-=-=-=-=-=-= THEME CONFIG =-=-=-=-=-=-=-=
@@ -293,6 +304,24 @@ require("bufferline").setup{
     mode = "tabs",
     reverse = true,
   }
+}
+EOF
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "c", "cpp", "typescript", "javascript", "python" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = { "javascript" },
+
+  highlight = {
+    enable = false,
+    additional_vim_regex_highlighting = false,
+  },
 }
 EOF
 
