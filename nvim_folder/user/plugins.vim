@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'maxmellon/vim-jsx-pretty'
 
   " python
-  Plug 'davidhalter/jedi-vim' 
+  " Plug 'davidhalter/jedi-vim' 
 
   " nerdtree
   Plug 'scrooloose/nerdtree'
