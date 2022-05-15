@@ -63,8 +63,8 @@ nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 
 " prettier
-vmap <leader>f  :call CocAction('runCommand', 'prettier.formatFile')<CR>
-nmap <leader>f  :call CocAction('runCommand', 'prettier.formatFile')<CR>
+vmap <leader>pf :call CocAction('runCommand', 'prettier.formatFile')<CR>
+nmap <leader>pf :call CocAction('runCommand', 'prettier.formatFile')<CR>
 
 " --
 
@@ -137,9 +137,6 @@ let g:copilot_no_tab_map = v:true
 
 " toggle terminal
 nmap <C-j> :ToggleTerm size=15 dir=. direction=horizontal<CR>
-
-" auto disable copilot
-autocmd VimEnter * Copilot disable
 
 " map to enable copilot
 nmap <Leader>ec :Copilot enable<CR>

@@ -22,10 +22,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'jistr/vim-nerdtree-tabs'
 
   " everforest theme
-  " Plug 'sainnhe/everforest'
+  Plug 'sainnhe/everforest'
 
   " dracula theme
-  Plug 'dracula/vim', { 'as': 'dracula' }
+  " Plug 'dracula/vim', { 'as': 'dracula' }
 
   " gruvbox
   " Plug 'ellisonleao/gruvbox.nvim'

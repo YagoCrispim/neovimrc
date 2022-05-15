@@ -67,13 +67,17 @@ au BufNewFile,BufRead *.tsx setf typescriptreact
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mdx set filetype=markdown
 
+" copilot
+autocmd VimEnter * Copilot disable
+
 " --
 
 " =============================
 "        THEME CONFIG
 " =============================
 set background=dark
-colorscheme dracula
+" colorscheme dracula
+colorscheme everforest
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -95,3 +99,4 @@ if has('nvim')
 endif
 
 syntax enable
+
