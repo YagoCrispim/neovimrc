@@ -63,8 +63,8 @@ nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> vd :call CocAction('jumpDefinition')<CR>
 
 " prettier
-vmap <leader>pf :call CocAction('runCommand', 'prettier.formatFile')<CR>
-nmap <leader>pf :call CocAction('runCommand', 'prettier.formatFile')<CR>
+vmap <leader>fd :call CocAction('runCommand', 'prettier.formatFile')<CR>
+nmap <leader>fd :call CocAction('runCommand', 'prettier.formatFile')<CR>
 
 " --
 
@@ -126,10 +126,7 @@ nnoremap <leader>ms :mksession! ~/.config/nvim/sessions<CR>
 nnoremap <leader>ls :source ~/.config/nvim/sessions<CR>
 
 " ack remap
-" ctrl + f f to search for file
-nmap     <C-F>f <Plug>CtrlSFPrompt                  
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-nmap     <C-F>p <Plug>CtrlSFPwordPath
+nmap     <C-F>f <Plug>CtrlSFPrompt
 
 " copilot
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")

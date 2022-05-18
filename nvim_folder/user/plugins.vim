@@ -71,4 +71,7 @@ call plug#begin('~/.vim/plugged')
 
   " treesiter
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+  " text finder
+  Plug 'dyng/ctrlsf.vim'
 call plug#end()
