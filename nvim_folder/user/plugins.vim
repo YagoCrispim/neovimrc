@@ -14,9 +14,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'maxmellon/vim-jsx-pretty'
 
-  " python
-  " Plug 'davidhalter/jedi-vim' 
-
   " nerdtree
   Plug 'scrooloose/nerdtree'
   Plug 'jistr/vim-nerdtree-tabs'
@@ -26,9 +23,6 @@ call plug#begin('~/.vim/plugged')
 
   " dracula theme
   " Plug 'dracula/vim', { 'as': 'dracula' }
-
-  " gruvbox
-  " Plug 'ellisonleao/gruvbox.nvim'
 
   " ident lines level
   Plug 'lukas-reineke/indent-blankline.nvim'
@@ -66,7 +60,6 @@ call plug#begin('~/.vim/plugged')
 
   " buffer lines
   Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-  " Plug 'ryanoasis/vim-devicons' Icons without colours
   Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
   " treesiter

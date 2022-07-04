@@ -5,3 +5,8 @@
     <img src="./neovim.png" width="30%" />
   </h1>
 </div>
+
+# Maybe
+
+:CocCommand clangd.install
+

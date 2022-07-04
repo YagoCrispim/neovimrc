@@ -68,7 +68,7 @@ au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mdx set filetype=markdown
 
 " copilot
-autocmd VimEnter * Copilot disable
+" autocmd VimEnter * Copilot disable
 
 " --
 
