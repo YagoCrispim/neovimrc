@@ -19,7 +19,7 @@ let g:NERDTreeStatusline = ''
 let g:NERDTreeWinSize=30
 
 " nedtreetabs config
-let g:nerdtree_tabs_smart_startup_focus=2 " always focus in file
+" let g:nerdtree_tabs_smart_startup_focus=2 " always focus in file
 let g:nerdtree_tabs_autofind=1
 
 " nerdtreertabs always open
